@@ -1,21 +1,172 @@
 @import url(reset.scss);
-// @import url(normalize.scss);
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+$break-small: 400px;
+$break-medium: 800px;
+$break-large: 1200px;
+
+$color-primary: rgb(182, 226, 211);
+$color-primary-light: lighten($color-primary, 15%);
+$color-primary-dark: darken($color-primary, 20%);
+
+$color-secondary: rgb(216, 167, 177);
+$color-secondary-light: lighten($color-secondary, 10%);
+$color-secondary-dark: darken($color-secondary, 10%);
+
+$color-tertiary: rgb(239, 124, 142);
+$color-tertiary-light: lighten($color-tertiary, 20%);
+$color-tertiary-dark: darken($color-tertiary, 20%);
+
+$font-family: 'Share Tech Mono', monospace;
+$font-size: 16px;
+$font-color: $color-primary;
+
+$padding: 1rem;
+$margin: 1rem;
+$gap: 1rem;
+
+$border-radius: 6px;
+
+$input-bg-color: $color-secondary;
+$input-border-color: $color-secondary;
+$input-bg-color-hover: $color-secondary-light;
+$input-border-color-hover: $color-secondary-light;
+$input-bg-color-active: $color-secondary-dark;
+$input-border-color-active: $color-secondary-dark;
+$input-border-color-focus: $input-border-color-active;
+$input-bg-color-focus: $input-bg-color-active;
+$input-bg-color-disabled: $color-primary-light;
+$input-border-size: 1px;
+$input-border-radius: calc($border-radius / 2);
+
+$error-color: $color-tertiary;
+$error-bg-color: $color-tertiary-light;
+
+body {
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $color-primary-dark;
+}
 
 .container {
-  background: #21a0a0;
+  background: $color-primary;
   width: 100vw;
   height: 100vh;
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  row-gap: 1rem;
 }
 
 .content {
-  background-color: #fcfff7;
+  background-color: #fff;
+  padding: calc($padding * 2);
+  max-width: 500px;
+  border-radius: $border-radius;
+}
 
-  padding: 50px;
-  height: 300px;
-  max-width: 400px;
+.title {
+  color: $color-secondary;
+  font-size: calc($font-size * 2);
+  font-weight: bolder;
+  border-bottom: 3px solid $color-primary;
+  margin-bottom: $margin;
+  padding-bottom: $padding;
+}
+
+.content-input {
+  display: grid;
+
+  &:not(:last-child) {
+    margin-bottom: $margin;
+  }
+
+  @media screen and (min-width: $break-small) {
+    grid-template-columns: 1fr 2fr;
+    gap: 0 $gap;
+    grid-template-areas:
+      'label input'
+      '. error ';
+  }
+
+  @media screen and (max-width: $break-small) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'label'
+      'input'
+      'error ';
+  }
+}
+
+.label {
+  color: $color-secondary;
+
+  grid-area: label;
+  align-self: center;
+  font-weight: bolder;
+  @media screen and (max-width: $break-small) {
+    padding-bottom: calc($padding / 2);
+  }
+}
+
+.input {
+  background: $input-bg-color;
+  border: $input-border-size solid $input-border-color;
+
+  font-family: $font-family;
+  font-weight: bold;
+  color: #fff;
+
+  padding: calc($padding / 3);
+  border-radius: $input-border-radius;
+  grid-area: input;
+
+  z-index: 11;
+  transition: all 0.3s;
+
+  &:hover {
+    background: $input-bg-color-hover;
+  }
+
+  &:active {
+    background: $input-border-color-active;
+  }
+
+  &:focus {
+    background: $input-bg-color-active;
+    box-shadow: 0 0 0;
+    outline: 0;
+  }
+
+  &-error {
+    border-color: $error-color;
+  }
+
+  &-disabled {
+    background-color: $input-bg-color-disabled;
+    border: 1px solid transparent;
+    color: $color-primary-dark;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $input-bg-color-disabled;
+      border: 1px solid transparent;
+    }
+  }
+}
+
+.error {
+  color: $error-color;
+  background-color: $error-bg-color;
+  font-size: $font-size * 0.8;
+  text-align: right;
+  border-radius: 0 0 calc($border-radius / 2) calc($border-radius / 2);
+  margin-top: -3px;
+  z-index: 10;
+  grid-area: error;
+  padding: calc($padding / 3);
+  padding-top: calc(calc($padding / 3) + 3px);
+  display: none;
 }
