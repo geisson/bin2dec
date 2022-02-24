@@ -1,16 +1,28 @@
 import '../sass/style.scss';
 
-const inputName = document.querySelector('[data-teste="nome"]') as HTMLInputElement;
-const btn = document.querySelector('[data-teste="btn"]') as HTMLButtonElement;
+const binaryNumberInput = document.querySelector('[data-input=number-binary]') as HTMLInputElement;
+const decimalNumberInput = document.querySelector('[data-input=number-decimal') as HTMLInputElement;
+const containerErrorBinary = document.querySelector('[data-erro=error-binary') as HTMLDivElement;
 
-const handleClick = (event:Event):void => {
-  event.preventDefault();
+function handleKeypress(this: HTMLInputElement, e: Event): void {
+  const binaryInputValue = this.value;
 
-  const inputValue = inputName.value;
+  const lastDigit = +binaryInputValue.substr(-1);
+  if (lastDigit !== 0 && lastDigit !== 1) {
+    containerErrorBinary.classList.remove('invisible');
+    binaryNumberInput.classList.add('input-error');
+  } else {
+    containerErrorBinary.classList.add('invisible');
+    binaryNumberInput.classList.remove('input-error');
+  }
 
-  console.log(`Ola mundo ${inputValue}`);
-  console.log(this);
-  console.log(event);
-};
+  console.log(`ultimo digitado: ${lastDigit}`);
 
-btn?.addEventListener('click', handleClick);
+  const convertBinaryToDecimal = parseInt(binaryInputValue, 2);
+
+  console.log(!convertBinaryToDecimal);
+
+  decimalNumberInput.value = convertBinaryToDecimal.toString();
+}
+
+binaryNumberInput?.addEventListener('input', handleKeypress);
