@@ -168,5 +168,8 @@ body {
   grid-area: error;
   padding: calc($padding / 3);
   padding-top: calc(calc($padding / 3) + 3px);
+}
+
+.invisible {
   display: none;
 }
