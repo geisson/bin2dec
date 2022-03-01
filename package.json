@@ -1,5 +1,5 @@
 {
-  "name": "Bin2Dec",
+  "name": "bin2dec",
   "version": "1.0.0",
   "description": "binary to decimal converter",
   "main": "index.js",

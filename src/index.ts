@@ -9,26 +9,25 @@ const checkIfBinaryIsValid = (numberBinary: string, regex: RegExp): boolean => !
 
 const convertBinaryToDecimal = (numberBinary: string): number|string => parseInt(numberBinary, 2) || '';
 
-const showError = (verifiedValue:boolean): void => {
-  if (verifiedValue) {
-    containerErrorBinary.classList.remove('invisible');
-    binaryNumberInput.classList.add('input-error');
-    decimalNumberInput.classList.add('input-error');
-    return;
-  }
-  if (!verifiedValue) {
-    containerErrorBinary.classList.add('invisible');
-    binaryNumberInput.classList.remove('input-error');
-    decimalNumberInput.classList.remove('input-error');
-  }
-};
+const showError = (verifiedValue: boolean): void => (verifiedValue
+  ? (
+    containerErrorBinary.classList.remove('invisible'),
+    binaryNumberInput.classList.add('input-error'),
+    decimalNumberInput.classList.add('input-error')
+  ) : (
+    containerErrorBinary.classList.add('invisible'),
+    binaryNumberInput.classList.remove('input-error'),
+    decimalNumberInput.classList.remove('input-error')
+  )
+);
 
 const showDecimalNumber = (decimalNumber: number|string, verifiedValue: boolean): void => {
   decimalNumberInput.value = !verifiedValue ? decimalNumber.toString() : 'binary number invalid';
 };
 
-function handleInput(this: HTMLInputElement): void {
-  const binaryInputValue = this.value;
+function handleInput(event: Event): void {
+  const binaryInput = event.target as HTMLInputElement;
+  const binaryInputValue = binaryInput.value;
 
   const ExpCheckDifferentNumber = /([^01])/;
   const verifiedValue = checkIfBinaryIsValid(binaryInputValue, ExpCheckDifferentNumber);
