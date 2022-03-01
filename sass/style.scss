@@ -123,7 +123,6 @@ body {
   grid-area: input;
 
   z-index: 11;
-  transition: all 0.3s;
 
   &:hover {
     background: $input-bg-color-hover;
@@ -154,7 +153,13 @@ body {
       background-color: $input-bg-color-disabled;
       border: 1px solid transparent;
     }
+    &.input-error {
+      border-color: $error-color;
+      color: $error-color;
+    }
   }
+
+  transition: all 0.3s;
 }
 
 .error {

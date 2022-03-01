@@ -13,9 +13,13 @@ const showError = (verifiedValue:boolean): void => {
   if (verifiedValue) {
     containerErrorBinary.classList.remove('invisible');
     binaryNumberInput.classList.add('input-error');
-  } else {
+    decimalNumberInput.classList.add('input-error');
+    return;
+  }
+  if (!verifiedValue) {
     containerErrorBinary.classList.add('invisible');
     binaryNumberInput.classList.remove('input-error');
+    decimalNumberInput.classList.remove('input-error');
   }
 };
 
