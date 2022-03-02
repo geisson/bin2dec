@@ -25,7 +25,7 @@ const showDecimalNumber = (decimalNumber: number|string, verifiedValue: boolean)
   decimalNumberInput.value = !verifiedValue ? decimalNumber.toString() : 'binary number invalid';
 };
 
-function handleInput(event: Event): void {
+const handleInput = (event: Event): void => {
   const binaryInput = event.target as HTMLInputElement;
   const binaryInputValue = binaryInput.value;
 
@@ -35,6 +35,6 @@ function handleInput(event: Event): void {
 
   showError(verifiedValue);
   showDecimalNumber(decimalNumber, verifiedValue);
-}
+};
 
 binaryNumberInput.addEventListener('input', handleInput);
