@@ -1,4 +1,5 @@
 import '../sass/style.scss';
+import '../index.html';
 
 const binaryNumberInput = document.querySelector('[data-input=number-binary]') as HTMLInputElement;
 const decimalNumberInput = document.querySelector('[data-input=number-decimal') as HTMLInputElement;
