@@ -1,169 +1,167 @@
-@import url(reset.scss);
-@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+@use 'sass:color';
 
+@import url('reset.scss');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+$size-base: 8;
 $break-small: 400px;
 $break-medium: 800px;
 $break-large: 1200px;
-$color-primary: rgb(182, 226, 211);
-$color-primary-light: lighten($color-primary, 15%);
-$color-primary-dark: darken($color-primary, 20%);
-$color-secondary: rgb(216, 167, 177);
-$color-secondary-light: lighten($color-secondary, 10%);
-$color-secondary-dark: darken($color-secondary, 10%);
-$color-tertiary: rgb(239, 124, 142);
-$color-tertiary-light: lighten($color-tertiary, 20%);
-$color-tertiary-dark: darken($color-tertiary, 20%);
-$font-family: "Share Tech Mono", monospace;
-$font-size: 16px;
-$font-color: $color-primary;
-$padding: 1rem;
-$margin: 1rem;
-$gap: 1rem;
-$border-radius: 6px;
-$input-bg-color: $color-secondary;
-$input-border-color: $color-secondary;
-$input-bg-color-hover: $color-secondary-light;
-$input-border-color-hover: $color-secondary-light;
-$input-bg-color-active: $color-secondary-dark;
-$input-border-color-active: $color-secondary-dark;
-$input-border-color-focus: $input-border-color-active;
-$input-bg-color-focus: $input-bg-color-active;
-$input-bg-color-disabled: $color-primary-light;
-$input-border-size: 1px;
-$input-border-radius: calc($border-radius / 2);
-$error-color: $color-tertiary;
-$error-bg-color: $color-tertiary-light;
+$color-primary: rgb(150, 206, 180);
+$color-secondary: rgb(255, 173, 96);
+$color-tertiary: rgb(255, 238, 173);
+$color-quaternary: rgb(217, 83, 79);
 
 body {
-  color: $color-primary-dark;
-  font-family: $font-family;
-  font-size: $font-size;
+  color: color.scale($color: $color-primary, $lightness: -15%);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px;
 }
 
-.container {
+.c-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: $color-primary;
-  row-gap: 1rem;
+  row-gap: 8px;
 }
 
-.content {
-  max-width: 500px;
-  padding: calc($padding * 2);
+.c-converter {
+  max-width: 300px;
+  padding: 24px;
   background-color: #fff;
-  border-radius: $border-radius;
+  border-radius: 4px;
+
+  @media screen and (min-width: $break-small) { max-width: 500px; }
+
+  &__title {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid $color-primary;
+    color: $color-secondary;
+    font-size: 2rem;
+    font-weight: 800;
+  }
 }
 
-.title {
-  margin-bottom: $margin;
-  padding-bottom: $padding;
-  border-bottom: 3px solid $color-primary;
-  color: $color-secondary;
-  font-size: calc($font-size * 2);
-  font-weight: bolder;
-}
-
-.content-input {
+.c-data-entry {
   display: grid;
 
-  &:not(:last-child) {
-    margin-bottom: $margin;
+  &:not(:last-child) { margin-bottom: 8px; }
+
+  &__label {
+    grid-area: label;
+    align-self: center;
+    color: $color-secondary;
+    font-weight: 600;
+
+    @media screen and (max-width: $break-small) { padding-bottom: 8px; }
+  }
+
+  &__input {
+    z-index: 10;
+    grid-area: input;
+    padding: 2px;
+    padding: 8px;
+    background: $color-secondary;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #fff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s;
+
+    &:hover {
+      background: color.scale($color: $color-secondary, $lightness: 15%);
+    }
+
+    &:focus {
+      background: color.scale($color: $color-secondary, $lightness: -15%);
+      box-shadow: 0 0 0;
+      outline: 0;
+    }
+
+    &:disabled {
+      background-color: $color-primary;
+      color: color.scale($color: $color-primary, $lightness: -50%);
+    }
+
+    &--error {
+      border: 1px solid $color-quaternary;
+      color: $color-quaternary;
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      z-index: 10;
+      grid-area: input;
+      padding: 2px;
+      background: $color-secondary;
+      border: 1px solid $color-secondary;
+      border-radius: 4px;
+      color: #fff;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 16px;
+      font-weight: bold;
+      transition: none;
+
+      &:hover {
+        background: color.scale($color: $color-secondary, $lightness: 15%);
+      }
+
+      &:focus {
+        background: color.scale($color: $color-secondary, $lightness: -15%);
+        box-shadow: 0 0 0;
+        outline: 0;
+      }
+    }
   }
 
   @media screen and (min-width: $break-small) {
     grid-template-areas:
-      "label input"
-      ". error ";
+      'label input'
+      '. warning ';
     grid-template-columns: 1fr 2fr;
-    gap: 0 $gap;
+    gap: 0 8px;
   }
 
   @media screen and (max-width: $break-small) {
     grid-template-areas:
-      "label"
-      "input"
-      "error ";
+      'label'
+      'input'
+      'warning ';
     grid-template-columns: 1fr;
   }
 }
 
-.label {
-  grid-area: label;
-  align-self: center;
-  color: $color-secondary;
-  font-weight: bolder;
-
-  @media screen and (max-width: $break-small) {
-    padding-bottom: calc($padding / 2);
-  }
-}
-
-.input {
-  z-index: 11;
-  grid-area: input;
-  padding: calc($padding / 3);
-  background: $input-bg-color;
-  border: $input-border-size solid $input-border-color;
-  border-radius: $input-border-radius;
-  color: #fff;
-  font-family: $font-family;
-  font-weight: bold;
-  transition: all 0.3s;
-
-  &:hover {
-    background: $input-bg-color-hover;
-  }
-
-  &:focus {
-    background: $input-bg-color-active;
-    box-shadow: 0 0 0;
-    outline: 0;
-  }
-
-  &:active {
-    background: $input-border-color-active;
-  }
-
-  &-error {
-    border-color: $error-color;
-  }
-
-  &-disabled {
-    background-color: $input-bg-color-disabled;
-    border: 1px solid transparent;
-    color: $color-primary-dark;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: $input-bg-color-disabled;
-      border: 1px solid transparent;
-    }
-
-    &.input-error {
-      border-color: $error-color;
-      color: $error-color;
-    }
-  }
-}
-
-.error {
+.c-warning {
   z-index: 10;
-  grid-area: error;
-  margin-top: -3px;
-  padding: calc($padding / 3);
-  padding-top: calc(calc($padding / 3) + 3px);
-  background-color: $error-bg-color;
-  border-radius: 0 0 calc($border-radius / 2) calc($border-radius / 2);
-  color: $error-color;
-  font-size: $font-size * 0.8;
+  grid-area: warning;
+  margin-top: -4px;
+  padding: 4px;
+  padding: 8px;
+  border-radius: 0 0 4px 4px;
+  font-size: 16px;
   text-align: right;
+
+  &--error {
+    background-color: $color-quaternary;
+    color: #fff;
+  }
 }
 
-.invisible {
-  display: none;
+.c-invisible {
+  position: absolute;
+  top: -40px;
+  visibility: none;
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    position: absolute;
+    top: -400px;
+    visibility: none;
+    transition: none;
+  }
 }

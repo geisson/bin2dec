@@ -7,7 +7,10 @@
     "stylelint-order",
     "stylelint-8-point-grid",
     "stylelint-declaration-block-no-ignored-properties",
-    "stylelint-group-selectors"
+    "stylelint-group-selectors",
+    "stylelint-a11y",
+    "@signal-noise/stylelint-scales",
+    "stylelint-use-nesting"
   ],
   "defaultSeverity": "warning",
   "rules": {
@@ -32,7 +35,10 @@
     "keyframe-declaration-no-important": true,
     "media-feature-name-no-unknown": true,
     "named-grid-areas-no-invalid": true,
-    "no-descending-specificity":[ true, {"ignore": ["selectors-within-list"]}],
+    "no-descending-specificity": [
+      true,
+      { "ignore": ["selectors-within-list"] }
+    ],
     "no-duplicate-at-import-rules": true,
     "no-duplicate-selectors": true,
     "no-empty-source": true,
@@ -131,9 +137,17 @@
     "function-comma-space-after": "always-single-line",
     "function-comma-space-before": "never",
     "function-max-empty-lines": 0,
-    "function-name-case": ["lower", {
-      "ignoreFunctions": ["/regex-as-string/", "/^get.*$/", "/^to.*$/", "non-regex"]
-    }],
+    "function-name-case": [
+      "lower",
+      {
+        "ignoreFunctions": [
+          "/regex-as-string/",
+          "/^get.*$/",
+          "/^to.*$/",
+          "non-regex"
+        ]
+      }
+    ],
     "function-parentheses-newline-inside": "always-multi-line",
     "function-parentheses-space-inside": "never-single-line",
     "function-url-quotes": "always",
@@ -178,12 +192,7 @@
     "selector-attribute-operator-space-after": "never",
     "selector-attribute-operator-space-before": "never",
     "selector-attribute-quotes": "always",
-    "selector-class-pattern": [
-      "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
-      {
-        "message": "Expected class selector to be kebab-case"
-      }
-    ],
+    "selector-class-pattern": null,
     "selector-combinator-space-after": "always",
     "selector-combinator-space-before": "always",
     "selector-descendant-combinator-no-non-space": true,
@@ -592,6 +601,43 @@
       "base": 4,
       "allowlist": ["2px", "1px", "0.0625rem"],
       "ignorelist": []
-    }
+    },
+    "a11y/content-property-no-static-value": true,
+    "a11y/font-size-is-readable": true,
+    "a11y/line-height-is-vertical-rhythmed": true,
+    "a11y/media-prefers-reduced-motion": true,
+    "a11y/media-prefers-color-scheme": null,
+    "a11y/no-display-none": true,
+    "a11y/no-obsolete-attribute": true,
+    "a11y/no-obsolete-element": true,
+    "a11y/no-spread-text": true,
+    "a11y/no-outline-none": true,
+    "a11y/no-text-align-justify": true,
+    "a11y/selector-pseudo-class-focus": true,
+
+    "scales/alpha-values": [10, 25, 50, 75, 90],
+    "scales/border-widths": [{ "scale": [1, 2, 4, 8], "units": ["px"] }],
+    "scales/font-families": ["Share Tech Mono", "monospace"],
+    "scales/font-sizes": [
+      { "scale": [1, 1.5, 2, 2.5, 3], "units": ["em", "rem"] },
+      { "scale": [8, 16, 24, 32], "units": ["px"] }
+    ],
+    "scales/font-weights": [400, 600, 800],
+    "scales/line-heights": [1, 1.5],
+    "scales/radii": [{ "scale": [2, 4, 8, 16], "units": ["px"] }],
+    "scales/sizes": null,
+    "scales/space": [
+      { "scale": [0.5, 1, 2], "units": ["em", "rem"] },
+      { "scale": [2, 4, 8, 16, 24, 32], "units": ["px"] }
+    ],
+    "scales/word-spacings": [
+      {
+        "scale": [-0.1, 0.2],
+        "units": ["rem"]
+      }
+    ],
+    "scales/z-indices": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+
+    "csstools/use-nesting": "always"
   }
 }

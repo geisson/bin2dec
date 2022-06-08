@@ -8,35 +8,40 @@
   </head>
 
   <body>
-    <div class="container">
-      <section class="content">
-        <h1 class="title">Bin2Dec</h1>
+    <div class="c-container">
+      <section class="c-converter">
+        <h1 class="c-converter__title">Bin2Dec</h1>
 
-        <div class="content-input">
-          <label for="number-binary" class="label"> Binary Number </label>
+        <div class="c-data-entry">
+          <label class="c-data-entry__label" for="number-binary">
+            Binary Number
+          </label>
           <input
-            type="number"
+            class="c-data-entry__input"
             id="number-binary"
+            type="number"
             data-input="number-binary"
-            class="input"
           />
-          <div class="error invisible" data-erro="error-binary">
+
+          <div
+            class="c-warning c-warning--error c-invisible"
+            data-erro="error-binary"
+          >
             Just type 0 or 1
           </div>
         </div>
 
-        <div class="content-input">
-          <label for="number-decimal" class="label"> ---Decimal Number </label>
+        <div class="c-data-entry">
+          <label class="c-data-entry__label" for="number-decimal">
+            Decimal Number
+          </label>
           <input
-            type="text"
+            class="c-data-entry__input c-data-entry__input--disabled"
             id="number-decimal"
+            type="text"
             data-input="number-decimal"
-            class="input input-disabled"
             disabled="disabled"
           />
-          <div class="error invisible" data-erro="error-decimal">
-            Just type 0 or 1
-          </div>
         </div>
       </section>
     </div>
